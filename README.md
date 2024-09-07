@@ -54,3 +54,28 @@ npm start
 - **🎨 전체 theme(ThemeProvider) 사용하여 다크모드 사용하려면?**
 
 </details>
+
+<br />
+
+### TypeScript💙
+
+<details>
+  <summary>
+    <strong>TypeScript에 대해 생각해보기 (👈 Click!)</strong>
+  </summary>
+
+  <br />
+
+- **💙 TypeScript VS PropTypes(React) 차이점은?**
+
+- **💙 Interface 란?**
+
+- **💙 Interface를 사용하지 않고 타입을 정의하고 싶다면?**
+
+- **💙 useState 상태 초기값 타입 외 다른 타입도 함께 정의하고 싶다면?**
+
+- **💙 Event Type 설정 하기 (input태그의 onChange 이벤트 함수 만들어본다면?)**
+
+- **💙 styled-components 공통 스타일 속성 TypeScript 로 셋팅하기**
+
+</details>
