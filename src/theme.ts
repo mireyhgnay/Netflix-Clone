@@ -2,11 +2,7 @@ import { DefaultTheme } from 'styled-components';
 import 'styled-components';
 
 export const theme: DefaultTheme = {
-  textColor: '#333',
-  bgColor: '#fff',
+  textColor: '#ff7675',
+  bgColor: '#2d3436',
+  pointColor: '#fdcb6e',
 };
-
-// export const darkTheme: DefaultTheme = {
-//   textColor: '#fff',
-//   bgColor: '#333',
-// };
