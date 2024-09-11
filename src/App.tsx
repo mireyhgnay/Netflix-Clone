@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -63,15 +63,9 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const Title = styled.h1`
-  color: ${(props) => props.theme.pointColor};
-  font-size: 25px;
-`;
-
 export default function App() {
   return (
     <>
-      <Title>Main Home</Title>
       <GlobalStyle />
       <Outlet />
     </>
