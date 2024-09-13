@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import ClipLoader from 'react-spinners/ClipLoader';
 import Header from '../components/Header';
+import Loader from '../components/Loader';
 
 const CoinsList = styled.ul``;
 
@@ -31,13 +31,6 @@ const Coin = styled.li`
     align-items: center;
     font-size: 16px;
   }
-`;
-
-const Loader = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50vh;
 `;
 
 const IconImg = styled.img`
@@ -76,9 +69,7 @@ export default function Coins() {
     <>
       <Header title='🪙 Coins 🪙' />
       {load ? (
-        <Loader>
-          <ClipLoader color='#fdcb6e' loading={load} size={50} />
-        </Loader>
+        <Loader load={load} />
       ) : (
         <CoinsList>
           {coins.map((coin) => (
