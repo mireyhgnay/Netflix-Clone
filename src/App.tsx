@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
    
@@ -63,11 +63,18 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const Container = styled.div`
+  max-width: 480px;
+  margin: 0 auto;
+`;
+
 export default function App() {
   return (
     <>
       <GlobalStyle />
-      <Outlet />
+      <Container>
+        <Outlet />
+      </Container>
     </>
   );
 }

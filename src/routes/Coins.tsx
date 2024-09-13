@@ -2,23 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import ClipLoader from 'react-spinners/ClipLoader';
-
-const Container = styled.div`
-  max-width: 480px;
-  margin: 0 auto;
-`;
-
-const Header = styled.header`
-  height: 15vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Title = styled.h1`
-  font-size: 35px;
-  font-weight: 600;
-`;
+import Header from '../components/Header';
 
 const CoinsList = styled.ul``;
 
@@ -89,10 +73,8 @@ export default function Coins() {
   }, []);
 
   return (
-    <Container>
-      <Header>
-        <Title>🪙 Coins 🪙</Title>
-      </Header>
+    <>
+      <Header title='🪙 Coins 🪙' />
       {load ? (
         <Loader>
           <ClipLoader color='#fdcb6e' loading={load} size={50} />
@@ -115,6 +97,6 @@ export default function Coins() {
           ))}
         </CoinsList>
       )}
-    </Container>
+    </>
   );
 }
