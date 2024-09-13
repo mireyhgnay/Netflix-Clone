@@ -27,11 +27,6 @@ const Coin = styled.li`
   color: ${(props) => props.theme.bgColor};
   border-radius: 15px;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-
   & + & {
     margin-top: 10px;
   }
@@ -44,12 +39,13 @@ const Coin = styled.li`
 
   a {
     transition: color 0.2s ease-in;
-    display: block;
     color: inherit;
-  }
-
-  span {
-    font-size: 20px;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
   }
 `;
 
@@ -58,6 +54,13 @@ const Loader = styled.div`
   justify-content: center;
   align-items: center;
   height: 50vh;
+`;
+
+const IconImg = styled.img`
+  width: 25px;
+  height: 25px;
+  vertical-align: text-bottom;
+  margin-right: 10px;
 `;
 
 interface ICoins {
@@ -98,8 +101,16 @@ export default function Coins() {
         <CoinsList>
           {coins.map((coin) => (
             <Coin key={coin.id}>
-              <Link to={`/:${coin.id}`}>{coin.name}</Link>
-              <span>👉</span>
+              <Link to={`/${coin.id}`} state={coin.name}>
+                <div>
+                  <IconImg
+                    src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
+                    alt='coin icon'
+                  />
+                  {coin.name}
+                </div>{' '}
+                <span>👉</span>
+              </Link>
             </Coin>
           ))}
         </CoinsList>
