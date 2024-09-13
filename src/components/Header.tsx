@@ -13,13 +13,13 @@ const Title = styled.h1`
 `;
 
 interface IHeaderContainer {
-  title: string;
+  title?: string;
 }
 
 export default function Header({ title }: IHeaderContainer) {
   return (
     <HeaderContainer>
-      <Title>{title}</Title>
+      <Title>{title || 'Coin'}</Title>
     </HeaderContainer>
   );
 }
