@@ -52,7 +52,9 @@ interface ICoins {
 }
 
 export default function Coins() {
-  const { data, isLoading } = useQuery<ICoins[]>('allCoins', fetchCoins);
+  const { data, isLoading } = useQuery<ICoins[]>('allCoins', fetchCoins, {
+    staleTime: 1000 * 60 * 5, // 5분마다 캐시 갱신
+  });
 
   return (
     <>
