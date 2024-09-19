@@ -1,4 +1,10 @@
-import { useLocation, useParams, Outlet } from 'react-router-dom';
+import {
+  useLocation,
+  useParams,
+  Outlet,
+  Link,
+  useMatch,
+} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Loader from '../components/Loader';
@@ -12,6 +18,7 @@ const Overview = styled.div`
   padding: 10px 20px;
   border-radius: 10px;
 `;
+
 const OverviewItem = styled.div`
   display: flex;
   flex-direction: column;
@@ -23,8 +30,34 @@ const OverviewItem = styled.div`
     margin-bottom: 5px;
   }
 `;
+
 const Description = styled.p`
   margin: 20px 0px;
+`;
+
+const Tabs = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 25px 0px;
+  gap: 10px;
+`;
+
+const Tab = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== 'isActive',
+})<{ isActive: boolean }>`
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 400;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 7px 0px;
+  border-radius: 10px;
+
+  a {
+    display: block;
+    color: ${(props) =>
+      props.isActive ? props.theme.pointColor : props.theme.textColor};
+  }
 `;
 
 interface IInfoData {
@@ -93,6 +126,8 @@ export default function Coin() {
   const params = useParams();
   const coinId = params.coinId as string;
   const { state } = useLocation() as ILocation;
+  const priceMatch = useMatch('/:coinId/price');
+  const chartMatch = useMatch('/:coinId/chart');
 
   useEffect(() => {
     (async () => {
@@ -143,6 +178,16 @@ export default function Coin() {
               <span>{price?.max_supply}</span>
             </OverviewItem>
           </Overview>
+
+          <Tabs>
+            <Tab isActive={chartMatch !== null}>
+              <Link to={`/${coinId}/chart`}>Chart</Link>
+            </Tab>
+            <Tab isActive={priceMatch !== null}>
+              <Link to={`/${coinId}/price`}>Price</Link>
+            </Tab>
+          </Tabs>
+
           <Outlet />
         </>
       )}
