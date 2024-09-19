@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../components/Header';
 import Loader from '../components/Loader';
+import { useQuery } from 'react-query';
+import { fetchCoins } from '../api';
 
 const CoinsList = styled.ul``;
 
@@ -51,41 +52,30 @@ interface ICoins {
 }
 
 export default function Coins() {
-  const [coins, setCoins] = useState<ICoins[]>([]);
-  const [load, setLoad] = useState(true);
-
-  // Data Fetch: 100개 데이터 가져오기
-  useEffect(() => {
-    (async () => {
-      const response = await fetch('https://api.coinpaprika.com/v1/coins');
-      const json = await response.json();
-      const data = json.slice(0, 100);
-      setCoins(data);
-      setLoad(false);
-    })();
-  }, []);
+  const { data, isLoading } = useQuery<ICoins[]>('allCoins', fetchCoins);
 
   return (
     <>
       <Header title='🪙 Coins 🪙' />
-      {load ? (
-        <Loader load={load} />
+      {isLoading ? (
+        <Loader load={isLoading} />
       ) : (
         <CoinsList>
-          {coins.map((coin) => (
-            <Coin key={coin.id}>
-              <Link to={`/${coin.id}`} state={coin.name}>
-                <div>
-                  <IconImg
-                    src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
-                    alt='coin icon'
-                  />
-                  {coin.name}
-                </div>{' '}
-                <span>👉</span>
-              </Link>
-            </Coin>
-          ))}
+          {data &&
+            data.slice(0, 100).map((coin) => (
+              <Coin key={coin.id}>
+                <Link to={`/${coin.id}`} state={coin.name}>
+                  <div>
+                    <IconImg
+                      src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
+                      alt='coin icon'
+                    />
+                    {coin.name}
+                  </div>{' '}
+                  <span>👉</span>
+                </Link>
+              </Coin>
+            ))}
         </CoinsList>
       )}
     </>
