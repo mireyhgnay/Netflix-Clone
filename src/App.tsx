@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { ReactQueryDevtools } from 'react-query/devtools';
+// import { ReactQueryDevtools } from 'react-query/devtools';
 import styled, { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
@@ -77,7 +77,7 @@ export default function App() {
       <Container>
         <Outlet />
       </Container>
-      <ReactQueryDevtools initialIsOpen={true} />
+      {/* <ReactQueryDevtools initialIsOpen={true} /> */}
     </>
   );
 }

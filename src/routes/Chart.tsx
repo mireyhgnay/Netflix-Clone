@@ -21,51 +21,51 @@ export default function Chart() {
     fetchCoinHistory(coinId)
   );
 
+  if (isLoading) {
+    return <span>Loading chart...</span>;
+  }
+
   if (!Array.isArray(data)) {
     return <p>찾는 데이터가 없습니다.</p>;
   }
 
   return (
     <div>
-      {isLoading ? (
-        'Loading chart...'
-      ) : (
-        <ApexChart
-          type='line'
-          series={[
-            {
-              name: 'Price',
-              data: data?.map((price) => price.close) as number[],
-            },
-          ]}
-          options={{
-            theme: {
-              mode: 'dark',
-            },
-            chart: {
-              height: 300,
-              width: 500,
-              toolbar: {
-                show: false,
-              },
-              background: 'transparent',
-            },
-            grid: { show: false },
-            stroke: {
-              curve: 'smooth',
-              width: 4,
-            },
-            yaxis: {
+      <ApexChart
+        type='line'
+        series={[
+          {
+            name: 'Price',
+            data: data?.map((price) => price.close) as number[],
+          },
+        ]}
+        options={{
+          theme: {
+            mode: 'dark',
+          },
+          chart: {
+            height: 300,
+            width: 500,
+            toolbar: {
               show: false,
             },
-            xaxis: {
-              axisBorder: { show: false },
-              axisTicks: { show: false },
-              labels: { show: false },
-            },
-          }}
-        />
-      )}
+            background: 'transparent',
+          },
+          grid: { show: false },
+          stroke: {
+            curve: 'smooth',
+            width: 4,
+          },
+          yaxis: {
+            show: false,
+          },
+          xaxis: {
+            axisBorder: { show: false },
+            axisTicks: { show: false },
+            labels: { show: false },
+          },
+        }}
+      />
     </div>
   );
 }
