@@ -152,7 +152,8 @@ export default function Coin() {
         <title>{state ? state : load ? 'Loading...' : infoData?.name}</title>
       </Helmet>
 
-      <Header title={state ? state : infoData?.name} />
+      <Header title={state ? state : infoData?.name} isBack={true} />
+
       {load ? (
         <Loader load={load} />
       ) : (
