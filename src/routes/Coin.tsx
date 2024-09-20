@@ -129,11 +129,17 @@ export default function Coin() {
 
   const { isLoading: infoLoading, data: infoData } = useQuery<IInfoData>(
     ['info', coinId],
-    () => fetchCoinsInfo(coinId)
+    () => fetchCoinsInfo(coinId),
+    {
+      staleTime: 1000 * 60 * 5, // 5분마다 캐시 갱신
+    }
   );
   const { isLoading: tickersLoading, data: tickersData } = useQuery<IPriceData>(
     ['tickers', coinId],
-    () => fetchCoinsTickers(coinId)
+    () => fetchCoinsTickers(coinId),
+    {
+      staleTime: 1000 * 60 * 5, // 5분마다 캐시 갱신
+    }
   );
 
   const load = infoLoading || tickersLoading;
@@ -180,7 +186,7 @@ export default function Coin() {
             </Tab>
           </Tabs>
 
-          <Outlet />
+          <Outlet context={coinId} />
         </>
       )}
     </>
