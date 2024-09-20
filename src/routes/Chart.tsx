@@ -17,12 +17,16 @@ interface IHistorical {
 export default function Chart() {
   const coinId = useOutletContext<string>();
 
-  const { data, isLoading } = useQuery<IHistorical[]>(['ohlcv', coinId], () =>
-    fetchCoinHistory(coinId)
+  const { data, isLoading } = useQuery<IHistorical[]>(
+    ['ohlcv', coinId],
+    () => fetchCoinHistory(coinId),
+    {
+      refetchInterval: 10000, // 10초에 한번씩 refetch ->
+    }
   );
 
   if (isLoading) {
-    return <span>Loading chart...</span>;
+    return <span>Loading Chart...</span>;
   }
 
   if (!Array.isArray(data)) {

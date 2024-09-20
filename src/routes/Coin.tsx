@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import Header from '../components/Header';
 import Loader from '../components/Loader';
+import { Helmet } from 'react-helmet';
 
 import styled from 'styled-components';
 import { useQuery } from 'react-query';
@@ -139,6 +140,7 @@ export default function Coin() {
     () => fetchCoinsTickers(coinId),
     {
       staleTime: 1000 * 60 * 5, // 5분마다 캐시 갱신
+      refetchInterval: 5000, // 5초마다 refetch하여 내용 업데이트
     }
   );
 
@@ -146,6 +148,10 @@ export default function Coin() {
 
   return (
     <>
+      <Helmet>
+        <title>{state ? state : load ? 'Loading...' : infoData?.name}</title>
+      </Helmet>
+
       <Header title={state ? state : infoData?.name} />
       {load ? (
         <Loader load={load} />
@@ -161,8 +167,8 @@ export default function Coin() {
               <span>${infoData?.symbol}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Open Source:</span>
-              <span>{infoData?.open_source ? 'Yes' : 'No'}</span>
+              <span>Price:</span>
+              <span>${tickersData?.quotes.USD.price.toFixed(3)}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>

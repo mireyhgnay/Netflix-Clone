@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Loader from '../components/Loader';
 import { useQuery } from 'react-query';
 import { fetchCoins } from '../api';
+import { Helmet } from 'react-helmet';
 
 const CoinsList = styled.ul``;
 
@@ -58,6 +59,9 @@ export default function Coins() {
 
   return (
     <>
+      <Helmet>
+        <title>Coins</title>
+      </Helmet>
       <Header title='🪙 Coins 🪙' />
       {isLoading ? (
         <Loader load={isLoading} />
