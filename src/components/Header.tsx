@@ -14,7 +14,7 @@ const HomeButton = styled(Link)`
   position: absolute;
   left: 0;
   top: 50%;
-  transform: tra;
+  transform: translateY(-50%);
 `;
 
 const Title = styled.h1`
