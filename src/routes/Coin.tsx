@@ -37,13 +37,6 @@ const Description = styled.p`
   margin: 20px 0px;
 `;
 
-const Tabs = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  margin: 25px 0px;
-  gap: 10px;
-`;
-
 const Tab = styled.div.withConfig({
   shouldForwardProp: (prop) => prop !== 'isActive',
 })<{ isActive: boolean }>`
@@ -52,8 +45,9 @@ const Tab = styled.div.withConfig({
   font-size: 12px;
   font-weight: 400;
   background-color: rgba(0, 0, 0, 0.5);
-  padding: 7px 0px;
+  padding: 12px 0px;
   border-radius: 10px;
+  margin: 25px 0;
 
   a {
     display: block;
@@ -125,7 +119,6 @@ export default function Coin() {
   const params = useParams();
   const coinId = params.coinId as string;
   const { state } = useLocation() as ILocation;
-  const priceMatch = useMatch('/:coinId/price');
   const chartMatch = useMatch('/:coinId/chart');
 
   const { isLoading: infoLoading, data: infoData } = useQuery<IInfoData>(
@@ -184,14 +177,13 @@ export default function Coin() {
             </OverviewItem>
           </Overview>
 
-          <Tabs>
-            <Tab isActive={chartMatch !== null}>
-              <Link to={`/${coinId}/chart`}>Chart</Link>
-            </Tab>
-            <Tab isActive={priceMatch !== null}>
-              <Link to={`/${coinId}/price`}>Price</Link>
-            </Tab>
-          </Tabs>
+          <Tab isActive={chartMatch !== null}>
+            {chartMatch ? (
+              <Link to={`/${coinId}`}>Chart 닫기</Link>
+            ) : (
+              <Link to={`/${coinId}/chart`}>Chart 보기</Link>
+            )}
+          </Tab>
 
           <Outlet context={coinId} />
         </>
