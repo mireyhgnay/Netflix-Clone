@@ -1,6 +1,9 @@
 import { Outlet } from 'react-router-dom';
 // import { ReactQueryDevtools } from 'react-query/devtools';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { darkTheme, lightTheme } from './theme';
+import { useRecoilValue } from 'recoil';
+import { isDarkAtom } from './atom';
 
 const GlobalStyle = createGlobalStyle`
    
@@ -71,12 +74,16 @@ const Container = styled.div`
 `;
 
 export default function App() {
+  const isDark = useRecoilValue(isDarkAtom);
+
   return (
     <>
-      <GlobalStyle />
-      <Container>
-        <Outlet />
-      </Container>
+      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+        <GlobalStyle />
+        <Container>
+          <Outlet />
+        </Container>
+      </ThemeProvider>
       {/* <ReactQueryDevtools initialIsOpen={true} /> */}
     </>
   );

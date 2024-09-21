@@ -16,7 +16,7 @@ import { fetchCoinsInfo, fetchCoinsTickers } from '../api';
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.cardBgColor};
   padding: 10px 20px;
   border-radius: 10px;
 `;
@@ -35,6 +35,7 @@ const OverviewItem = styled.div`
 
 const Description = styled.p`
   margin: 20px 0px;
+  color: ${(props) => props.theme.darkButtonColor};
 `;
 
 const Tab = styled.div.withConfig({
@@ -44,7 +45,7 @@ const Tab = styled.div.withConfig({
   text-transform: uppercase;
   font-size: 12px;
   font-weight: 400;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.cardBgColor};
   padding: 12px 0px;
   border-radius: 10px;
   margin: 25px 0;

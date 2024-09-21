@@ -2,6 +2,11 @@ import { useQuery } from 'react-query';
 import { fetchCoinHistory } from '../api';
 import { useOutletContext } from 'react-router-dom';
 import ApexChart from 'react-apexcharts';
+import styled from 'styled-components';
+
+const AlertText = styled.span`
+  color: ${(props) => props.theme.darkButtonColor};
+`;
 
 interface IHistorical {
   time_open: string;
@@ -26,11 +31,11 @@ export default function Chart() {
   );
 
   if (isLoading) {
-    return <span>Loading Chart...</span>;
+    return <AlertText>Loading Chart...</AlertText>;
   }
 
   if (!Array.isArray(data)) {
-    return <p>찾는 데이터가 없습니다.</p>;
+    return <AlertText>찾는 데이터가 없습니다.</AlertText>;
   }
 
   return (
