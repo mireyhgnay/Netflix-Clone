@@ -1,89 +1,22 @@
-import styled from 'styled-components';
-import { mixins } from '../styles/mixin';
 import { Link, useMatch } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { motion, useAnimation, useViewportScroll } from 'framer-motion';
-
-const Nav = styled(motion.nav)`
-  ${mixins.flexBox('row', 'center', 'space-between')}
-  ${mixins.position('fixed', 0)};
-  ${mixins.size('100%', '68px')};
-  padding: 0 4%;
-  font-size: 14px;
-  color: ${(props) => props.theme.white.darker};
-`;
-
-const NavBox = styled.div`
-  ${mixins.flexBox('row', 'center')}
-
-  .rightMenu {
-    position: relative;
-    margin-left: 20px;
-
-    &:first-of-type {
-      margin-left: 0;
-    }
-  }
-`;
-
-const Logo = styled.svg`
-  ${mixins.size('95px', '25px')};
-  fill: ${(props) => props.theme.red};
-  margin-right: 25px;
-`;
-
-const Items = styled.ul`
-  display: inline-flex;
-`;
-
-const Item = styled.li`
-  & + & {
-    margin-left: 20px;
-  }
-`;
-
-const ItemLink = styled(Link).withConfig({
-  shouldForwardProp: (prop) => prop !== 'isActive',
-})<{ isActive: boolean }>`
-  color: ${(props) => (props.isActive ? '#fff' : props.theme.white.lighter)};
-  font-weight: ${(props) => (props.isActive ? 500 : 'normal')};
-  transition: color 0.3s ease-in-out;
-
-  &:hover {
-    color: ${(props) => props.theme.white.darker};
-  }
-`;
-
-const Search = styled.div`
-  color: #fff;
-  cursor: pointer;
-
-  svg {
-    height: 24px;
-  }
-`;
-
-const Noti = styled.div`
-  color: #fff;
-  cursor: pointer;
-
-  svg {
-    height: 24px;
-  }
-`;
-
-const Input = styled(motion.input)`
-  ${mixins.position('absolute', undefined, 0)};
-  transform-origin: right center;
-  height: 25px;
-  padding-left: 35px;
-  z-index: -1;
-  color: #fff;
-  font-size: 14px;
-  background-color: transparent;
-  border: 1px solid ${(props) => props.theme.white.lighter};
-  outline: none;
-`;
+import { useState } from 'react';
+import {
+  motion,
+  useAnimation,
+  useMotionValueEvent,
+  useScroll,
+} from 'framer-motion';
+import {
+  Input,
+  Item,
+  ItemLink,
+  Items,
+  Logo,
+  Nav,
+  NavBox,
+  Noti,
+  Search,
+} from './Header.styles';
 
 const navVariants = {
   top: {
@@ -100,11 +33,10 @@ export default function Header() {
   const mvMatch = useMatch('/musicvideo');
   const newMatch = useMatch('/new');
   const likeMatch = useMatch('/like');
-
   const [searchOpen, setSearchOpen] = useState(false);
   const inputAnimation = useAnimation();
   const navAnimation = useAnimation();
-  const { scrollY } = useViewportScroll();
+  const { scrollY } = useScroll();
 
   const toggleSearch = () => {
     if (searchOpen) {
@@ -117,15 +49,10 @@ export default function Header() {
     setSearchOpen((prev) => !prev);
   };
 
-  useEffect(() => {
-    scrollY.onChange(() => {
-      if (scrollY.get() > 80) {
-        navAnimation.start('scroll');
-      } else {
-        navAnimation.start('top');
-      }
-    });
-  }, [scrollY, navAnimation]);
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    if (latest < 0.1) navAnimation.start('top');
+    else navAnimation.start('scroll');
+  });
 
   return (
     <Nav variants={navVariants} animate={navAnimation} initial={'top'}>
@@ -141,33 +68,31 @@ export default function Header() {
           </Logo>
         </Link>
         <Items>
-          <Items>
-            <Item>
-              <ItemLink to='/' isActive={homeMatch !== null}>
-                홈
-              </ItemLink>
-            </Item>
-            <Item>
-              <ItemLink to='/tv' isActive={tvMatch !== null}>
-                예능
-              </ItemLink>
-            </Item>
-            <Item>
-              <ItemLink to='/musicvideo' isActive={mvMatch !== null}>
-                뮤직비디오
-              </ItemLink>
-            </Item>
-            <Item>
-              <ItemLink to='/new' isActive={newMatch !== null}>
-                NEW! 요즘 대세 콘텐츠
-              </ItemLink>
-            </Item>
-            <Item>
-              <ItemLink to='/like' isActive={likeMatch !== null}>
-                내가 찜한 리스트
-              </ItemLink>
-            </Item>
-          </Items>
+          <Item>
+            <ItemLink to='/' isActive={homeMatch !== null}>
+              홈
+            </ItemLink>
+          </Item>
+          <Item>
+            <ItemLink to='/tv' isActive={tvMatch !== null}>
+              예능
+            </ItemLink>
+          </Item>
+          <Item>
+            <ItemLink to='/musicvideo' isActive={mvMatch !== null}>
+              뮤직비디오
+            </ItemLink>
+          </Item>
+          <Item>
+            <ItemLink to='/new' isActive={newMatch !== null}>
+              NEW! 요즘 대세 콘텐츠
+            </ItemLink>
+          </Item>
+          <Item>
+            <ItemLink to='/like' isActive={likeMatch !== null}>
+              내가 찜한 리스트
+            </ItemLink>
+          </Item>
         </Items>
       </NavBox>
       <NavBox>
