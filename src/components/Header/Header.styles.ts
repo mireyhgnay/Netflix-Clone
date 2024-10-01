@@ -10,6 +10,11 @@ export const Nav = styled(motion.nav)`
   padding: 0 4%;
   font-size: 14px;
   color: ${(props) => props.theme.white.darker};
+  background-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.7) 10%,
+    transparent
+  );
 `;
 
 export const NavBox = styled.div`
