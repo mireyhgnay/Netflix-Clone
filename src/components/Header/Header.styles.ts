@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import { mixins } from '../styles/mixin';
+import { mixins } from '../../styles/mixin';
 import { Link, LinkProps } from 'react-router-dom';
 
 export const Nav = styled(motion.nav)`
@@ -23,12 +23,6 @@ export const NavBox = styled.div`
       margin-left: 0;
     }
   }
-`;
-
-export const Logo = styled.svg`
-  ${mixins.size('95px', '25px')};
-  fill: ${(props) => props.theme.red};
-  margin-right: 25px;
 `;
 
 export const Items = styled.ul`
@@ -68,16 +62,3 @@ const IconButton = styled.div`
 export const Search = styled(IconButton)``;
 
 export const Noti = styled(IconButton)``;
-
-export const Input = styled(motion.input)`
-  ${mixins.position('absolute', undefined, 0)};
-  transform-origin: right center;
-  height: 25px;
-  padding-left: 35px;
-  z-index: -1;
-  color: #fff;
-  font-size: 14px;
-  background-color: transparent;
-  border: 1px solid ${(props) => props.theme.white.lighter};
-  outline: none;
-`;
