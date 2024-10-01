@@ -1,9 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
-import Coins from './routes/Coins';
-import Coin from './routes/Coin';
 import App from './App';
-// import Price from './routes/Price';
-import Chart from './routes/Chart';
+import Home from './routes/Home';
+import Search from './routes/Search';
+import Tv from './routes/Tv';
+import MusicVideo from './routes/MusicVideo';
+import New from './routes/New';
+import Like from './routes/Like';
 
 const router = createBrowserRouter([
   {
@@ -11,22 +13,28 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: '',
-        element: <Coins />,
+        index: true,
+        element: <Home />,
       },
       {
-        path: '/:coinId',
-        element: <Coin />,
-        children: [
-          // {
-          //   path: '/:coinId/price',
-          //   element: <Price />,
-          // },
-          {
-            path: '/:coinId/chart',
-            element: <Chart />,
-          },
-        ],
+        path: 'search',
+        element: <Search />,
+      },
+      {
+        path: 'tv',
+        element: <Tv />,
+      },
+      {
+        path: 'musicvideo',
+        element: <MusicVideo />,
+      },
+      {
+        path: 'new',
+        element: <New />,
+      },
+      {
+        path: 'like',
+        element: <Like />,
       },
     ],
   },
