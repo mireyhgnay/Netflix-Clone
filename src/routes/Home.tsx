@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function Home() {
-  return <div>home</div>;
+  return <div style={{ height: '5000px' }}>home</div>;
 }
