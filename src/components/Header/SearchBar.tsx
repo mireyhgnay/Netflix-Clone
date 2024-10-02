@@ -1,19 +1,6 @@
 import { useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
-import { mixins } from '../../styles/mixin';
-import styled from 'styled-components';
-
-export const Input = styled(motion.input)`
-  ${mixins.position('absolute', '-4px', 0)};
-  transform-origin: right center;
-  padding: 8px 8px 8px 35px;
-  z-index: -1;
-  color: #fff;
-  font-size: 14px;
-  background-color: #000;
-  border: 1px solid ${(props) => props.theme.white.lighter};
-  outline: none;
-`;
+import { Input } from './Header.styles';
 
 export default function SearchBar() {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -43,6 +30,7 @@ export default function SearchBar() {
       </motion.svg>
       <Input
         type='text'
+        name='search'
         animate={inputAnimation}
         initial={{ scaleX: 0 }}
         transition={{ type: 'linear' }}

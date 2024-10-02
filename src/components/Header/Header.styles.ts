@@ -30,6 +30,12 @@ export const NavBox = styled.div`
   }
 `;
 
+export const Logo = styled.svg`
+  ${mixins.size('95px', '25px')};
+  fill: ${(props) => props.theme.red};
+  margin-right: 25px;
+`;
+
 export const Items = styled.ul`
   display: inline-flex;
 `;
@@ -54,6 +60,18 @@ export const ItemLink = styled(Link).withConfig({
   &:hover {
     color: ${(props) => props.theme.white.darker};
   }
+`;
+
+export const Input = styled(motion.input)`
+  ${mixins.position('absolute', '-4px', 0)};
+  transform-origin: right center;
+  padding: 8px 8px 8px 35px;
+  z-index: -1;
+  color: #fff;
+  font-size: 14px;
+  background-color: #000;
+  border: 1px solid ${(props) => props.theme.white.lighter};
+  outline: none;
 `;
 
 const IconButton = styled.div`

@@ -1,11 +1,4 @@
-import styled from 'styled-components';
-import { mixins } from '../../styles/mixin';
-
-const Logo = styled.svg`
-  ${mixins.size('95px', '25px')};
-  fill: ${(props) => props.theme.red};
-  margin-right: 25px;
-`;
+import { Logo } from './Header.styles';
 
 export default function LogoSvg() {
   return (
