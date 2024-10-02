@@ -6,7 +6,7 @@ export const mixins = {
   `,
 
   // flexbox
-  flexBox: (direction = 'row', align = 'center', justify = 'start') => `
+  flexBox: (direction = 'row', align = 'stretch', justify = 'start') => `
     display: flex;
     flex-direction: ${direction};
     align-items: ${align};
