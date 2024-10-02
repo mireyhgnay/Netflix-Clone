@@ -4,14 +4,13 @@ import { mixins } from '../../styles/mixin';
 import styled from 'styled-components';
 
 export const Input = styled(motion.input)`
-  ${mixins.position('absolute', undefined, 0)};
+  ${mixins.position('absolute', '-4px', 0)};
   transform-origin: right center;
-  height: 25px;
-  padding-left: 35px;
+  padding: 8px 8px 8px 35px;
   z-index: -1;
   color: #fff;
   font-size: 14px;
-  background-color: transparent;
+  background-color: #000;
   border: 1px solid ${(props) => props.theme.white.lighter};
   outline: none;
 `;
@@ -30,7 +29,7 @@ export default function SearchBar() {
     <>
       <motion.svg
         onClick={toggleSearch}
-        animate={{ x: searchOpen ? -158 : 0 }}
+        animate={{ x: searchOpen ? -160 : 0 }}
         transition={{ type: 'linear' }}
         fill='currentColor'
         viewBox='0 0 20 20'
@@ -43,6 +42,7 @@ export default function SearchBar() {
         ></path>
       </motion.svg>
       <Input
+        type='text'
         animate={inputAnimation}
         initial={{ scaleX: 0 }}
         transition={{ type: 'linear' }}
