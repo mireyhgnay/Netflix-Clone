@@ -4,7 +4,12 @@ import styled from 'styled-components';
 import { makeImagePath } from '../utils';
 import { mixins } from '../styles/mixin';
 import Slider from '../components/Slider/Slider';
+import { useState } from 'react';
 
+const Wrapper = styled.div`
+  background: black;
+  padding-bottom: 200px;
+`;
 const Loader = styled.div`
   ${mixins.flexBox('row', 'center', 'center')}
   height: 100vh;
@@ -36,21 +41,42 @@ export default function Home() {
     ['movies', 'nowPlaying'],
     getMovies
   );
-  console.log(data, isLoading);
+  const offset = 6;
+  const [index, setIndex] = useState(0);
+  const [leaving, setLeaving] = useState(false);
+  const incraseIndex = () => {
+    if (data) {
+      if (leaving) return;
+
+      toggleLeaving();
+      const totalMovies = data.results.length - 1;
+      const maxIndex = Math.floor(totalMovies / offset) - 1;
+      setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
+    }
+  };
+  const toggleLeaving = () => setLeaving((prev) => !prev);
 
   return (
-    <>
+    <Wrapper>
       {isLoading ? (
         <Loader>Loading...</Loader>
       ) : (
         <>
-          <Banner bgPhoto={makeImagePath(data?.results[0].backdrop_path || '')}>
+          <Banner
+            bgPhoto={makeImagePath(data?.results[0].backdrop_path || '')}
+            onClick={incraseIndex}
+          >
             <Title>{data?.results[0].title}</Title>
             <Overview>{data?.results[0].overview}</Overview>
           </Banner>
-          <Slider />
+          <Slider
+            index={index}
+            data={data?.results || []}
+            offset={offset}
+            toggleLeaving={toggleLeaving}
+          />
         </>
       )}
-    </>
+    </Wrapper>
   );
 }
