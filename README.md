@@ -22,6 +22,4 @@ npm start
 
 ### Notion✍🏻
 
-- [Header Component 👉](https://hyerimiya.notion.site/Header-11347244c10780248124caac8be86b87?pvs=4)
-  - Framer Motion을 사용해서 Header Fixed Scroll 과 Search Bar Toggle Click 기능 구현
-  - shouldForwardProp : props가 DOM 요소에 전달되지 않도록 필터링하기
+- [해당 플젝을 만들면서 배운 내용들 👉](https://hyerimiya.notion.site/ReactJS-Master-Class-Netflix-92eb65b329b3461cb4917b7ba33f87ad?pvs=4)
